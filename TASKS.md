@@ -68,7 +68,7 @@ Cubre: criterios 1, 2, 3, 4, 5 y 6 (lo que ve el usuario).
    del prototipo.
 4. Correr `npm test`, `npm run lint` y `npm run build` en `frontend/`.
 
-## T4 ⬜ Verificación final y "Cómo probarlo"
+## T4 ✅ Verificación final y "Cómo probarlo"
 Cubre: criterio 8 completo.
 
 1. Agregar `.env.example` en `backend/` y `frontend/`, sin secretos.
