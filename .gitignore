@@ -1,0 +1,10 @@
+node_modules/
+.next/
+dist/
+coverage/
+logs/
+.env
+.env.*
+!.env.example
+.claude/.build-active
+.claude/settings.local.json
