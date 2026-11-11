@@ -1,0 +1,45 @@
+openapi: 3.1.0
+info:
+  title: Sandler Factory, endpoints propios del frontend
+  version: 0.1.0
+  description: >
+    Endpoints que expone el servidor de Next.js. La pantalla se construye
+    contra este contrato; el del backend está en backend/openapi.yaml.
+servers:
+  - url: http://localhost:3000
+paths:
+  /api/health:
+    get:
+      operationId: getBackendHealth
+      summary: Consulta el /health del backend (tiempo máximo 5 s) y clasifica el resultado.
+      responses:
+        "200":
+          description: El backend respondió exactamente {"status":"ok"}.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HealthOk"
+        "503":
+          description: >
+            El backend no está bien. down = no responde; timeout = tardó más
+            de 5 s; bad_response = respondió algo distinto de ok (incluye
+            redirecciones y errores).
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HealthError"
+components:
+  schemas:
+    HealthOk:
+      type: object
+      required: [status]
+      additionalProperties: false
+      properties:
+        status: { type: string, const: ok }
+    HealthError:
+      type: object
+      required: [status, reason]
+      additionalProperties: false
+      properties:
+        status: { type: string, const: error }
+        reason: { type: string, enum: [down, timeout, bad_response] }

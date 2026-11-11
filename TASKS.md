@@ -30,7 +30,7 @@ Cubre: criterio 7, y criterio 8 en la parte del backend.
    servidor) y `backend/src/server.ts` (lo arranca).
 6. Correr `npm test`, `npm run lint` y `npm run build` en `backend/`.
 
-## T2 ⬜ Frontend: intermediario `/api/health`
+## T2 ✅ Frontend: intermediario `/api/health`
 Cubre: criterios 2, 3 y 4 (del lado del servidor), y el criterio 9.
 
 1. Crear el proyecto Next.js en `frontend/` (App Router, TypeScript, Tailwind)
