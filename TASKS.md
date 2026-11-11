@@ -49,7 +49,7 @@ Cubre: criterios 2, 3 y 4 (del lado del servidor), y el criterio 9.
    `frontend/src/app/api/health/route.ts` (expone `GET /api/health`).
 5. Correr `npm test` y `npm run lint` en `frontend/`.
 
-## T3 ⬜ Frontend: pantalla con los tres estados y "Volver a probar"
+## T3 ✅ Frontend: pantalla con los tres estados y "Volver a probar"
 Cubre: criterios 1, 2, 3, 4, 5 y 6 (lo que ve el usuario).
 
 1. Escribir el test `frontend/src/components/HealthStatus.test.tsx`, que simula
