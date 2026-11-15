@@ -1,4 +1,4 @@
-# Sandler Software Factory
+# softwarefactory
 
 A way of working with coding agents (Claude Code) where a PM who doesn't program directs the
 work: the agent interviews, writes the spec, builds with tests first, gets reviewed by a
