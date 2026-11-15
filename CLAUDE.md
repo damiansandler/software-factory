@@ -6,9 +6,14 @@ The project rules are in AGENTS.md (imported above). This file only adds what is
 specific to working with Claude here.
 
 ## Who you work with
-The person directing you (the PM) is not a programmer. **Talk to them in Spanish**, in
-plain language, and explain each important decision in one or two sentences. Write
-documentation and specs in English.
+The person directing you (the PM) is not a programmer.
+
+**PM language: Spanish** (set it to Spanish or English when the project starts).
+
+Talk to the PM in the PM language, in plain language, and explain each important decision
+in one or two sentences. The PM language is for the conversation only: everything written
+to the repository is in English (code, code comments, commit messages, documentation,
+specs, tasks, decisions, log and hook messages).
 
 ## Workflow
 1. `/spec`: interview the PM and write `specs/NNN-name/spec.md` (until it says "Status: approved").

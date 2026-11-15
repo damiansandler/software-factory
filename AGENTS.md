@@ -73,7 +73,9 @@ _TODO: add each surprise that cost time (a library quirk, a provider behaviour),
 _TODO: rules not met yet, so they aren't flagged as new failures. Remove each one when it's fixed._
 
 ## Conventions
-- Documentation in English. Code comments in Spanish, explaining the why, not the what.
+- Everything in the repository is in English: code, code comments (explaining the why, not
+  the what), commit messages, documentation and specs. Only the conversation with the PM
+  uses the PM language (see CLAUDE.md).
 - If a document and the code disagree, the code wins: fix the document.
 - Git: work on a `build/<name>` branch; don't merge into `main` unless asked (`/deploy` does
   it). Conventional Commits (`feat:`, `fix:`, `docs:`…), one per logical step, with the test

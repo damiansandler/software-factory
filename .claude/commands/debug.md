@@ -1,7 +1,7 @@
 ---
 description: Investigate an error down to the root cause and fix it there
 ---
-Talk to me in Spanish, in plain language.
+Talk to me in the PM language (CLAUDE.md), in plain language.
 
 I'll give you a symptom (an error, a stack trace, a failing test, a screenshot or something
 that doesn't behave the way its spec in specs/ says). Follow this order:

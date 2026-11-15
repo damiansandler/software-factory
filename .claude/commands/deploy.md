@@ -2,7 +2,7 @@
 description: Verify, merge the current branch into main and publish it
 ---
 Publish what is on the current branch. Follow this order and stop at any failure,
-explaining to me what happened in plain Spanish. How this project publishes (host, online
+explaining to me what happened in the PM language (CLAUDE.md), in plain words. How this project publishes (host, online
 check, secret variable names) is in AGENTS.md → Publishing; if that section is still
 _TODO_, fill it in with me first.
 

@@ -1,7 +1,7 @@
 ---
 description: Build an approved feature spec end to end, without pauses
 ---
-Talk to me in Spanish, in plain language. Write tasks.md, decisions.md and other docs in English.
+Talk to me in the PM language (CLAUDE.md), in plain language. Write everything in the repository in English.
 
 ## Before starting
 - The feature is the folder I name, or else the highest-numbered folder in `specs/`.

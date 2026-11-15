@@ -1,7 +1,7 @@
 ---
 description: Understand what to build and write the feature spec (with a visual prototype if there are screens)
 ---
-Talk to me in Spanish, in plain language.
+Talk to me in the PM language (CLAUDE.md), in plain language.
 
 Read AGENTS.md, ARCHITECTURE.md, docs/business.md, docs/providers/ and the ADRs in docs/adr/.
 If AGENTS.md still has _TODO_ sections that this feature needs (project, stack, commands),
@@ -36,5 +36,5 @@ If a product or architecture decision I make here is durable (it will outlive th
 feature: who pays, which provider, a limit, a security rule), propose an ADR for
 docs/adr/ using docs/adr/template.md and link it from the spec.
 
-Show me the spec and wait for my "aprobado" (approved). Only then add the line
+Show me the spec and wait for my "approved". Only then add the line
 "Status: approved" at the top of the spec. Don't build anything in this command.

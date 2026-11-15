@@ -8,7 +8,7 @@ no provider: those are filled in by each project.
 ## What's inside
 | Piece | File | What it does |
 |---|---|---|
-| Rules for the agent | `CLAUDE.md`, `AGENTS.md` | How to talk to the PM (Spanish, plain language), the workflow, the hard rules. `AGENTS.md` is a template with _TODO_ sections for the project. |
+| Rules for the agent | `CLAUDE.md`, `AGENTS.md` | How to talk to the PM (in the PM language, Spanish or English, plain language), the workflow, the hard rules. `AGENTS.md` is a template with _TODO_ sections for the project. |
 | `/spec` | `.claude/commands/spec.md` | Interviews the PM one question at a time, builds a clickable prototype if there are screens, and writes `specs/NNN-name/spec.md` until the PM approves it. |
 | `/build` | `.claude/commands/build.md` | Builds an approved spec without pauses: plan in `tasks.md`, test first, one commit per task, minor rulings in `decisions.md`. |
 | `/debug` | `.claude/commands/debug.md` | From a symptom to the root cause, with a regression test; never patches the symptom. |
@@ -20,18 +20,20 @@ no provider: those are filled in by each project.
 
 ## Starting a new project with it
 1. Copy everything in this repository (including `.claude/`) into the new project's root.
-2. Open Claude Code there and run `/spec` with the first feature. It fills in the _TODO_
+2. Set the **PM language** in `CLAUDE.md` (Spanish or English).
+3. Open Claude Code there and run `/spec` with the first feature. It fills in the _TODO_
    sections of `AGENTS.md` (project, stack, commands) with you as part of the interview.
-3. Put the project's test command in `.claude/test-command` (the first `/build` does it if
+4. Put the project's test command in `.claude/test-command` (the first `/build` does it if
    you don't), and add the stack's ignores to `.gitignore`.
-4. Before the first `/deploy`, fill in **Publishing** in `AGENTS.md`: host, online check and
+5. Before the first `/deploy`, fill in **Publishing** in `AGENTS.md`: host, online check and
    the names of the secret variables.
 
 ## The loop
-`/spec` → (PM says "aprobado") → `/build` → PM tries it → `/deploy`. Errors at any point → `/debug`.
+`/spec` → (PM says "approved") → `/build` → PM tries it → `/deploy`. Errors at any point → `/debug`.
 
 ## Conventions
-- The agent talks to the PM in Spanish; documentation, specs and code are in English
-  (code comments in Spanish, explaining the why).
+- The agent talks to the PM in the **PM language** set in `CLAUDE.md` (Spanish or English).
+- Everything written to the repository is in English: code, code comments, commits,
+  documentation, specs.
 - One folder per feature in `specs/`, one file per durable decision in `docs/adr/`.
 - If a document and the code disagree, the code wins and the document is fixed.
