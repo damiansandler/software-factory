@@ -43,7 +43,7 @@ flowchart LR
     end
     spec --> g1 --> build --> g2 --> g3 --> deploy
     debug["/debug<br/>root cause + regression test"]
-    debug -.-> build
+    debug -.-> g2
 
     classDef agent fill:#5ec4a0,stroke:#2f8f6c,color:#0b2a20
     classDef gate fill:#1f2a5c,stroke:#1f2a5c,color:#ffffff
@@ -51,12 +51,12 @@ flowchart LR
     class g1,g2,g3 gate
 ```
 
-Green: agents do the work. Dark blue: you decide. `/debug` can be called from anywhere; its
-fix goes back through the build with a regression test.
+Green: agents do the work. Dark blue: you decide. `/debug` can be called at any point: it fixes
+the cause with a regression test, then you try the fix and ask for `/deploy` like any other change.
 
 | Gate | Who | What passes it |
 |---|---|---|
-| 1 · Spec | You | Say "approved" on `spec.md`. Workflow rule: agents don't build from an unapproved spec. |
+| 1 · Spec | You | Say "approved" (or "aprobado") on `spec.md`. Workflow rule: agents don't build from an unapproved spec. |
 | 2 · Try it | You | Follow the "How to test it" steps `/build` hands over, one per acceptance criterion. Engineers usually review the branch's diff here too. |
 | 3 · Publish | You | Ask for `/deploy`. Workflow rule: agents don't merge into `main` or publish without that request. |
 
@@ -64,8 +64,10 @@ fix goes back through the build with a regression test.
 **You need:** Claude Code, a git repository for the project, and the project's own runtime and
 test tooling. Publishing also needs a hosting setup you're authorized to deploy to.
 
-1. Copy everything in this repository (including `.claude/`) into the project's root. If the
-   project already has some of these files, review them before overwriting.
+1. Copy everything in this repository (including `.claude/`) into the project's root, except
+   this `README.md`: rename `README.template.md` to `README.md` instead, so the project gets
+   its own README. If the project already has some of these files, review them before
+   overwriting.
 2. In `CLAUDE.md`, set the **owner language** (Spanish or English) and the **owner profile**
    (technical or non-technical).
 3. Open Claude Code there and run `/spec` with the first feature. It fills in the _TODO_
@@ -147,10 +149,12 @@ At any point, give it the symptom (an error, a screenshot, "it does X instead of
 2. **Isolate:** shrink it to the smallest failing case, ideally a failing test.
 3. **Name the cause:** one sentence, with the exact line as evidence, even when the cause is in
    a different part of the system than the symptom.
-4. **Fix and guard:** fix the cause, add a regression test, and look for the same bug elsewhere.
+4. **Fix and guard:** write a test that fails because of the cause, fix the cause, and look for
+   the same bug elsewhere. Then you try the fix and, when you're happy, ask for `/deploy`.
 
-It doesn't mask symptoms: no longer timeouts, extra retries or looser checks to make an error
-go away, unless the evidence shows that is the actual cause. And it doesn't guess.
+It never masks a symptom: no longer timeouts, extra retries or looser checks to make an error
+go away. And it doesn't guess: if it can't find the cause, it says what it tried and what
+evidence is missing.
 
 ## Principles
 - **Agents propose, you decide.** Approving a spec, accepting the result and publishing are
@@ -158,11 +162,12 @@ go away, unless the evidence shows that is the actual cause. And it doesn't gues
 - **Nothing is trusted until someone tried to break it.** First the `refuter`, then you.
 - **A criterion without a test isn't done.** Each one starts as a failing test. If the
   behavior grew and the tests didn't, that's a warning, not a pass.
-- **Small doubts don't stop the build.** Minor ones are decided and logged in `decisions.md`;
-  the build only stops for irreversible actions, security-sensitive changes, anything beyond
-  its branch, or a broken spec.
+- **Small doubts don't stop the build.** Minor ones are decided and logged in `decisions.md`.
+  The build only stops to ask for irreversible or destructive actions, anything touching
+  secrets, auth, permissions or money beyond the spec, effects outside its branch, or a spec
+  too inconsistent to follow.
 - **Every feature has one home.** One folder per feature (`specs/NNN-name/`) holds the spec,
-  the prototype, the plan and the decisions; the branch and the commits carry the same name.
+  the prototype, the plan and the decisions.
 - **Code says what the system does; the spec says what it should do.** When docs and code
   disagree, the docs are fixed. When code and an approved spec disagree, someone investigates:
   either the code is fixed or the spec is changed with your approval.
@@ -179,13 +184,14 @@ go away, unless the evidence shows that is the actual cause. And it doesn't gues
 | `/deploy` | [`.claude/commands/deploy.md`](.claude/commands/deploy.md) | Runs the full check, scans the commits for secrets, merges into `main`, pushes and waits until the new version is online. |
 | `refuter` | [`.claude/agents/refuter.md`](.claude/agents/refuter.md) | Sub-agent that tries to prove each task does NOT meet its criteria or breaks a hard rule. |
 | Tests hook | [`.claude/hooks/stop-tests.sh`](.claude/hooks/stop-tests.sh), `.claude/test-command` | While `/build` runs, Claude Code can't finish with failing tests. |
-| Permissions | [`.claude/settings.json`](.claude/settings.json) | Blocks reading env files with secrets, force pushes and `rm -rf`. |
-| Documentation skeleton | `ARCHITECTURE.md`, `docs/`, `specs/` | Where each kind of knowledge lives: ADRs, providers, runbooks, status, business, specs. |
+| Permissions | [`.claude/settings.json`](.claude/settings.json) | Blocks the common ways to read env files with secrets, force push and delete folders recursively. Pattern-based: not every variant. |
+| Documentation skeleton | `README.template.md`, `ARCHITECTURE.md`, `docs/`, `specs/` | Where each kind of knowledge lives: ADRs, providers, runbooks, status, business, specs. |
 
 ## Safety and limits
 - **It's a way of working, not a security boundary.** The gates and "never" rules are
   instructions agents follow; the hook and the permissions are the only parts Claude Code
-  enforces. Neither replaces access control.
+  enforces, and the permissions only catch the command patterns they list. Neither replaces
+  access control.
 - **For production, add your own guards:** branch protection on `main`, CI that runs the
   tests on every push, and deployment permissions limited to the people who should have them.
 - **Tests and review raise confidence; they don't prove correctness.** High-risk changes

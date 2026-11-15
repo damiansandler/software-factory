@@ -1,6 +1,6 @@
 # Business
 
-_TODO: filled in during the first `/spec`._
+_TODO: fill in when the project starts; `/spec` reads it before every interview._
 
 ## Product
 What it is and the problem it solves, in two or three sentences.

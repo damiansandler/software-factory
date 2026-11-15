@@ -11,7 +11,7 @@ Create the feature folder `specs/NNN-short-name/`, where NNN is the next number 
 highest one in `specs/` (for example `003-export-to-csv`). Everything for this feature
 lives there.
 
-Interview me ONE question at a time, in plain language, in this order:
+Interview me ONE question at a time, at the owner profile (CLAUDE.md), in this order:
 1. The problem and who it is for (with concrete examples).
 2. The flow, step by step.
 3. The edge cases (an external service fails or is slow, a request or message arrives
@@ -38,7 +38,8 @@ feature: who pays, which provider, a limit, a security rule), propose an ADR for
 docs/adr/ using docs/adr/template.md and link it from the spec.
 
 If the requirements change after approval, edit the spec, show me what changed and wait for
-a new "approved".
+a new approval.
 
-Show me the spec and wait for my "approved". Only then add the line
-"Status: approved" at the top of the spec. Don't build anything in this command.
+Show me the spec and wait for my approval: "approved", or "aprobado" when the owner language
+is Spanish. Nothing else counts as approval. Only then add the line "Status: approved" (always
+in English) at the top of the spec. Don't build anything in this command.

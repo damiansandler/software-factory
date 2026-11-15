@@ -1,6 +1,6 @@
 # Project status and pending work
 
-_Kept up to date at the end of every `/build` and `/deploy`._
+_`/build` updates it when a feature is finished._
 
 ## What exists today
 | Feature | State |
