@@ -1,28 +1,40 @@
 ---
-description: Entender qué construir y escribir SPEC.md (con prototipo visual si hay pantallas)
+description: Understand what to build and write the feature spec (with a visual prototype if there are screens)
 ---
-Leé CLAUDE.md y, si existen, docs/negocio.md y docs/proveedores/.
+Talk to me in Spanish, in plain language.
 
-Entrevistame de a UNA pregunta por vez, en lenguaje llano, en este orden:
-1. El problema y para quién es (con ejemplos concretos).
-2. El flujo paso a paso.
-3. Los casos borde (falla un proveedor, llega un webhook repetido, el usuario
-   abandona a la mitad, el monto cambia entre la cotización y el pago).
-4. Dos o tres direcciones de solución con sus trade-offs; yo elijo.
-5. Cómo sabremos que funciona.
+Read AGENTS.md, ARCHITECTURE.md, docs/business.md, docs/providers/ and the ADRs in docs/adr/.
+If AGENTS.md still has _TODO_ sections that this feature needs (project, stack, commands),
+fill them in with me first.
 
-Si algo depende de cómo se comporta un proveedor y no está en docs/proveedores/,
-decímelo en vez de suponerlo.
+Create the feature folder `specs/NNN-short-name/`, where NNN is the next number after the
+highest one in `specs/` (for example `003-export-to-csv`). Everything for this feature
+lives there.
 
-Si la funcionalidad tiene pantallas, antes de pedirme aprobación generá
-`prototype/index.html`: un archivo único, con datos falsos y sin backend, que
-muestre cada pantalla y cada estado (éxito, error, cargando) y se pueda
-clickear entre ellos. Decime cómo abrirlo en el navegador y ajustalo con mis
-comentarios hasta que me guste.
+Interview me ONE question at a time, in plain language, in this order:
+1. The problem and who it is for (with concrete examples).
+2. The flow, step by step.
+3. The edge cases (an external service fails or is slow, a request or message arrives
+   twice, the user abandons halfway, data changes between two steps).
+4. Two or three solution directions with their trade-offs; I choose.
+5. How we'll know it works.
 
-Escribí SPEC.md con: objetivo, flujo, pantallas confirmadas (si las hay),
-criterios de aceptación (una lista de cosas verificables, escritas en lenguaje
-de producto) y fuera de alcance.
+If something depends on how an external provider behaves and it's not in docs/providers/,
+tell me instead of assuming it.
 
-Mostrámelo y esperá mi "aprobado". Solo entonces agregá la línea
-"Estado: aprobado" al principio de SPEC.md. No construyas nada en este comando.
+If the feature has screens, before asking for my approval generate
+`specs/NNN-short-name/prototype/index.html`: a single file, with fake data and no
+backend, that shows every screen and every state (success, error, loading, empty) and lets
+me click between them. Tell me how to open it in the browser and adjust it with my
+comments until I like it.
+
+Write `specs/NNN-short-name/spec.md`, in English, with: goal, flow, confirmed
+screens (if any), business rules, edge cases, acceptance criteria (a list of
+verifiable things, written in product language), out of scope and technical notes.
+
+If a product or architecture decision I make here is durable (it will outlive this
+feature: who pays, which provider, a limit, a security rule), propose an ADR for
+docs/adr/ using docs/adr/template.md and link it from the spec.
+
+Show me the spec and wait for my "aprobado" (approved). Only then add the line
+"Status: approved" at the top of the spec. Don't build anything in this command.
