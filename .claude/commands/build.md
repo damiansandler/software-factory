@@ -17,11 +17,11 @@ Talk to me in the owner language and at the owner profile (CLAUDE.md). Write eve
 Write `tasks.md` in the feature folder: small tasks, in dependency order (contracts and
 data first, then what uses them, then the screens). For each task, a micro-plan written
 for someone without context: ordered steps, exact file paths, which spec criterion each
-step covers and where its test lives. Continue without waiting for my ok.
+step covers (by its AC ID) and where its test lives. Continue without waiting for my ok.
 
 ## 2. For each task
-1. First write the test for each testable criterion. Run it and confirm it
-   fails for the right reason.
+1. First write the test for each testable criterion, with its AC ID in the test name. Run it
+   and confirm it fails for the right reason.
 2. Implement the minimum to make it pass. Never weaken, skip or delete a test
    to make it pass. If you add new logic and the number of tests didn't grow,
    that logic isn't covered: mark it ⚠️, not ✅.
@@ -39,7 +39,7 @@ Don't ask me anything. For minor doubts, decide and write one line in the
 feature's `decisions.md`: "Ruling: what — why — cost if wrong". If a decision is
 durable beyond this feature, also write an ADR in docs/adr/.
 If a criterion can't be met as written, mark it ⚠️ with the reason. Never
-reinterpret it silently.
+reinterpret or rewrite it silently: changing a criterion goes back to the owner.
 Stop and ask me ONLY if:
 1. the operation is irreversible or destructive,
 2. it touches secrets, auth, permissions or money beyond what the spec asks for,
@@ -55,5 +55,4 @@ Before stopping to ask me, remove the marker: `rm -f .claude/.build-active`.
 3. Remove the marker: `rm -f .claude/.build-active`.
 4. Push the branch: `git push -u origin <branch>`.
 5. Give me a short summary: what was done, what is ⚠️, and "How to test it":
-   the commands to start the app and the steps to verify each acceptance
-   criterion.
+   how to start the app and, for each AC ID, the steps to verify it.

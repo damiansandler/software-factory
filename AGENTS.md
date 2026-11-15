@@ -76,7 +76,9 @@ _TODO: rules not met yet, so they aren't flagged as new failures. Remove each on
 - Everything in the repository is in English: code, code comments (explaining the why, not
   the what), commit messages, documentation and specs. Only the conversation with the owner
   uses the owner language (see CLAUDE.md).
-- If a document and the code disagree, the code wins: fix the document.
+- If a document that describes the system disagrees with the code, the code wins: fix the
+  document. If the code disagrees with an approved spec, that's a bug or a change of
+  requirements: investigate, then fix the code or update the spec with the owner's approval.
 - Git: work on a `build/<name>` branch; don't merge into `main` unless asked (`/deploy` does
   it). Conventional Commits (`feat:`, `fix:`, `docs:`…), one per logical step, with the test
   and its code together. Never force push.

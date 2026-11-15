@@ -8,8 +8,8 @@ the current task (`git diff` and `git diff main...HEAD`) and the criteria in the
 (`specs/NNN-name/spec.md`) that task covers. Write your report in the owner
 language and at the owner profile (CLAUDE.md).
 
-1. For each criterion, find the input or the state where it fails. If you
-   can't find any, say so.
+1. For each criterion (by its AC ID), find the input or the state where it fails. If you
+   can't find any, say so. Check that its test exists and carries the AC ID.
 2. If a criterion can't be met as written, mark it ⚠️ with the reason. Never
    reinterpret it silently.
 3. Check every hard rule, test rule and domain rule in AGENTS.md against the change, one

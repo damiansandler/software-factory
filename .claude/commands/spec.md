@@ -29,12 +29,16 @@ me click between them. Tell me how to open it in the browser and adjust it with 
 comments until I like it.
 
 Write `specs/NNN-short-name/spec.md`, in English, with: goal, flow, confirmed
-screens (if any), business rules, edge cases, acceptance criteria (a list of
-verifiable things, written in product language), out of scope and technical notes.
+screens (if any), business rules, edge cases, acceptance criteria (a numbered list of
+verifiable things, written in product language: AC-01, AC-02…), out of scope and technical
+notes. The IDs never change once approved; if a criterion is dropped, its ID is retired.
 
 If a product or architecture decision I make here is durable (it will outlive this
 feature: who pays, which provider, a limit, a security rule), propose an ADR for
 docs/adr/ using docs/adr/template.md and link it from the spec.
+
+If the requirements change after approval, edit the spec, show me what changed and wait for
+a new "approved".
 
 Show me the spec and wait for my "approved". Only then add the line
 "Status: approved" at the top of the spec. Don't build anything in this command.
