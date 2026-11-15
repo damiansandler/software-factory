@@ -1,26 +1,30 @@
 ---
-description: Investigar un error hasta la causa raíz y arreglarlo ahí
+description: Investigate an error down to the root cause and fix it there
 ---
-Te voy a dar un síntoma (un error, un stack trace, un test que falla o algo que
-no se comporta como dice SPEC.md). Seguí este orden:
+Talk to me in Spanish, in plain language.
 
-1. Juntá evidencia primero: el error exacto, los logs de `logs/`, el estado de
-   la operación en la base. Leé también docs/proveedores/ si interviene uno.
-2. Reproducilo. Si no podés reproducirlo, decime eso: ya es un hallazgo.
-3. Aislá un caso mínimo que falle.
-4. Nombrá la causa en una frase, con evidencia archivo:línea. Distinguí dónde
-   APARECE el error de dónde NACE (el síntoma puede estar en el frontend y la
-   causa en el backend, o en cómo respondió un proveedor). Si tu explicación
-   contiene "probablemente" o "de alguna manera", seguí aislando.
-5. Escribí primero un test que falle por esa causa y después arreglá en la
-   causa. El test de regresión es el criterio 1 de todo arreglo.
-6. Radio de impacto: buscá el mismo patrón en otros lugares antes de dar el
-   arreglo por terminado y corré todos los tests.
+I'll give you a symptom (an error, a stack trace, a failing test, a screenshot or something
+that doesn't behave the way its spec in specs/ says). Follow this order:
 
-Nunca parches el síntoma: no agrandes timeouts, no agregues reintentos para
-tapar un fallo, no aflojes asserts y no tragues errores con try/catch vacíos.
+1. Gather evidence first: the exact error, the logs, the state of the data involved.
+   Also read docs/providers/ if an external service is involved, and docs/runbooks/ in
+   case the symptom is already known.
+2. Reproduce it. If you can't reproduce it, tell me so: that's already a finding.
+3. Isolate a minimal failing case.
+4. Name the cause in one sentence, with file:line evidence. Distinguish where
+   the error SHOWS UP from where it ORIGINATES (the symptom may be on a screen and the
+   cause on the server, or in how a provider responded). If your explanation contains
+   "probably" or "somehow", keep isolating.
+5. First write a test that fails because of that cause, then fix the cause.
+   The regression test is criterion 1 of every fix.
+6. Blast radius: look for the same pattern elsewhere before calling the fix
+   done, and run all the tests.
+7. If you learned something about a provider or a recurring failure, write it down in
+   docs/providers/ or docs/runbooks/.
 
-Si en dos pasadas completas no encontrás la causa, no inventes: entregame un
-reporte de "trabado" con qué reprodujiste, qué descartaste, tu mejor hipótesis
-y qué evidencia falta. En un sistema de pagos vale más que un arreglo
-especulativo.
+Never patch the symptom: don't raise timeouts, don't add retries to hide a
+failure, don't loosen asserts and don't swallow errors with empty try/catch.
+
+If after two full passes you can't find the cause, don't make one up: give me
+a "stuck" report with what you reproduced, what you ruled out, your best
+hypothesis and what evidence is missing. That is worth more than a speculative fix.

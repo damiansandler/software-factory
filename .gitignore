@@ -1,10 +1,13 @@
-node_modules/
-.next/
-dist/
-coverage/
-logs/
+# Secrets: only .env.example (names, no values) is committed
 .env
 .env.*
 !.env.example
+
+# Local logs of provider calls (may hold test data)
+logs/
+
+# Claude Code: build marker and personal settings
 .claude/.build-active
 .claude/settings.local.json
+
+# Add the ignores of the project's stack below

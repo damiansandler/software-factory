@@ -1,51 +1,59 @@
 ---
-description: Construir SPEC.md de punta a punta, sin pausas
+description: Build an approved feature spec end to end, without pauses
 ---
-## Antes de empezar
-- Si SPEC.md no existe o no dice "Estado: aprobado", frená y avisame.
-- Leé CLAUDE.md, SPEC.md y lo que haga falta de docs/.
-- Creá la rama `build/<nombre-corto>` desde main.
-- Activá la marca de build: `touch .claude/.build-active`. Mientras exista, no
-  podés terminar con los tests en rojo.
+Talk to me in Spanish, in plain language. Write tasks.md, decisions.md and other docs in English.
+
+## Before starting
+- The feature is the folder I name, or else the highest-numbered folder in `specs/`.
+  If its `spec.md` doesn't exist or doesn't say "Status: approved", stop and tell me.
+- Read CLAUDE.md, AGENTS.md, ARCHITECTURE.md, the spec and whatever you need from docs/.
+- Make sure `.claude/test-command` holds the project's test command (see AGENTS.md →
+  Commands). If it's missing, create it.
+- Create the `build/<short-name>` branch from main.
+- Turn on the build marker: `touch .claude/.build-active`. While it exists, you
+  can't finish with failing tests.
 
 ## 1. Plan
-Escribí TASKS.md: tareas chicas, en orden de contrato (backend primero, después
-frontend). Por cada tarea, un micro-plan escrito para alguien sin contexto:
-pasos ordenados, rutas de archivo exactas, qué criterio de SPEC.md cubre cada
-paso y dónde vive su test. Seguí sin esperar mi ok.
+Write `tasks.md` in the feature folder: small tasks, in dependency order (contracts and
+data first, then what uses them, then the screens). For each task, a micro-plan written
+for someone without context: ordered steps, exact file paths, which spec criterion each
+step covers and where its test lives. Continue without waiting for my ok.
 
-## 2. Por cada tarea
-1. Escribí primero el test de cada criterio testeable. Corrélo y confirmá que
-   falla por la razón correcta.
-2. Implementá lo mínimo para que pase. Nunca debilites, saltees o borres un test
-   para ponerlo verde. Si agregás lógica nueva y la cantidad de tests no creció,
-   esa lógica no está cubierta: marcala ⚠️, no ✅.
-3. Corré tests y lint de la carpeta que tocaste.
-4. Invocá al subagente `refuter` con la tarea. Si el veredicto es CORREGIR,
-   arreglá y volvé a invocarlo (máximo 5 vueltas).
-5. Si después de 5 vueltas sigue fallando, aplicá el protocolo de /debug (causa
-   raíz antes de seguir) y anotá el hallazgo en DECISIONS.md. Si tampoco así
-   avanza, dejá la tarea marcada ⚠️ con un reporte de dónde te trabaste y pasá
-   a la siguiente que no dependa de ella.
-6. Un commit por tarea (Conventional Commits), con el test y su código juntos.
+## 2. For each task
+1. First write the test for each testable criterion. Run it and confirm it
+   fails for the right reason.
+2. Implement the minimum to make it pass. Never weaken, skip or delete a test
+   to make it pass. If you add new logic and the number of tests didn't grow,
+   that logic isn't covered: mark it ⚠️, not ✅.
+3. Run the tests and lint for what you touched.
+4. Invoke the `refuter` subagent with the task and the feature folder. If the
+   verdict is FIX, fix it and invoke it again (at most 5 rounds).
+5. If it still fails after 5 rounds, apply the /debug protocol (root cause
+   before moving on) and record the finding in `decisions.md`. If that doesn't
+   get it moving either, leave the task marked ⚠️ with a report of where you
+   got stuck and move on to the next task that doesn't depend on it.
+6. One commit per task (Conventional Commits), with the test and its code together.
 
-## 3. Reglas durante el build
-No me preguntes nada. Ante dudas menores, decidí y anotá en DECISIONS.md una
-línea: "Ruling: qué — por qué — costo si está mal".
-Si un criterio no se puede cumplir tal como está escrito, marcalo ⚠️ con el
-motivo. Nunca lo reinterpretes en silencio.
-Frená y preguntame SOLO si:
-1. la operación es irreversible o destructiva,
-2. toca secretos, auth o lógica de movimiento de fondos más allá de lo que pide
-   SPEC.md,
-3. tendría un efecto fuera de la rama (merge, push a main, estado de un entorno),
-4. SPEC.md es tan inconsistente que cualquier camino sería adivinar.
-Antes de frenar a preguntarme, borrá la marca: `rm -f .claude/.build-active`.
+## 3. Rules during the build
+Don't ask me anything. For minor doubts, decide and write one line in the
+feature's `decisions.md`: "Ruling: what — why — cost if wrong". If a decision is
+durable beyond this feature, also write an ADR in docs/adr/.
+If a criterion can't be met as written, mark it ⚠️ with the reason. Never
+reinterpret it silently.
+Stop and ask me ONLY if:
+1. the operation is irreversible or destructive,
+2. it touches secrets, auth, permissions or money beyond what the spec asks for,
+3. it would have an effect outside the branch (merge, push to main, the state
+   of an environment),
+4. the spec is so inconsistent that any path would be a guess.
+Before stopping to ask me, remove the marker: `rm -f .claude/.build-active`.
 
-## 4. Al terminar
-1. Corré tests, lint y build completos de backend y frontend. Todo en verde.
-2. Borrá la marca: `rm -f .claude/.build-active`.
-3. Subí la rama: `git push -u origin <rama>`.
-4. Dame un resumen corto: qué se hizo, qué quedó ⚠️ y "Cómo probarlo": los
-   comandos para levantar la app y los pasos para verificar cada criterio de
-   aceptación.
+## 4. When finished
+1. Run the full check from AGENTS.md (tests, lint, build). All green.
+2. Update README.md, ARCHITECTURE.md, docs/status.md, docs/providers/ and
+   docs/runbooks/ if the feature changed what they describe.
+3. Remove the marker: `rm -f .claude/.build-active`.
+4. Push the branch: `git push -u origin <branch>`.
+5. Give me a short summary: what was done, what is ⚠️, and "How to test it":
+   the commands to start the app and the steps to verify each acceptance
+   criterion.
