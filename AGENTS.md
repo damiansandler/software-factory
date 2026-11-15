@@ -41,7 +41,7 @@ _TODO: used by `/deploy`._
 - **Where to look when it fails:** the host's logs screen.
 
 ## Hard rules
-- **Test environments only** until the PM says otherwise. Never use real credentials or
+- **Test environments only** until the owner says otherwise. Never use real credentials or
   real personal data. Never read the env files that hold values (`.env`, `.env.local`…; the
   permission settings block them). Document every variable, without values, in `.env.example`.
 - **Secrets** only through environment variables. Never in code, tests, logs or commits.
@@ -74,8 +74,8 @@ _TODO: rules not met yet, so they aren't flagged as new failures. Remove each on
 
 ## Conventions
 - Everything in the repository is in English: code, code comments (explaining the why, not
-  the what), commit messages, documentation and specs. Only the conversation with the PM
-  uses the PM language (see CLAUDE.md).
+  the what), commit messages, documentation and specs. Only the conversation with the owner
+  uses the owner language (see CLAUDE.md).
 - If a document and the code disagree, the code wins: fix the document.
 - Git: work on a `build/<name>` branch; don't merge into `main` unless asked (`/deploy` does
   it). Conventional Commits (`feat:`, `fix:`, `docs:`…), one per logical step, with the test

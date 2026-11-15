@@ -1,7 +1,7 @@
 ---
 description: Understand what to build and write the feature spec (with a visual prototype if there are screens)
 ---
-Talk to me in the PM language (CLAUDE.md), in plain language.
+Talk to me in the owner language and at the owner profile (CLAUDE.md).
 
 Read AGENTS.md, ARCHITECTURE.md, docs/business.md, docs/providers/ and the ADRs in docs/adr/.
 If AGENTS.md still has _TODO_ sections that this feature needs (project, stack, commands),

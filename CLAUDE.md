@@ -6,17 +6,25 @@ The project rules are in AGENTS.md (imported above). This file only adds what is
 specific to working with Claude here.
 
 ## Who you work with
-The person directing you (the PM) is not a programmer.
+The person directing you (the **owner**) may be an engineer or a product manager. Set both
+values when the project starts:
 
-**PM language: Spanish** (set it to Spanish or English when the project starts).
+- **Owner language: Spanish** (Spanish or English)
+- **Owner profile: non-technical** (technical or non-technical)
 
-Talk to the PM in the PM language, in plain language, and explain each important decision
-in one or two sentences. The PM language is for the conversation only: everything written
-to the repository is in English (code, code comments, commit messages, documentation,
-specs, tasks, decisions, log and hook messages).
+Talk to the owner in the owner language and explain each important decision in one or two
+sentences.
+- **Non-technical owner:** plain words only (never "repository", "API", "migration"…); the
+  "How to test it" steps are things to do in the app.
+- **Technical owner:** technical terms, file paths and diffs are welcome; "How to test it"
+  also says which tests cover each criterion.
+
+The owner language is for the conversation only: everything written to the repository is in
+English (code, code comments, commit messages, documentation, specs, tasks, decisions, log
+and hook messages).
 
 ## Workflow
-1. `/spec`: interview the PM and write `specs/NNN-name/spec.md` (until it says "Status: approved").
+1. `/spec`: interview the owner and write `specs/NNN-name/spec.md` (until it says "Status: approved").
 2. `/build`: build that spec without interruptions, with `tasks.md` (plan) and `decisions.md`
    (minor rulings) in the same folder.
 3. `/debug`: investigate an error down to the root cause and fix it there.

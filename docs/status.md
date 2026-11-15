@@ -14,6 +14,6 @@ Which external accounts exist, which environment variables each environment need
 only) and where they are set.
 
 ## Pending
-### Next (defined by the PM)
+### Next (defined by the owner)
 ### Before production
 ### Debt against the rules in AGENTS.md

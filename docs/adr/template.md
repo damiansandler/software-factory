@@ -2,7 +2,7 @@
 
 - **Status:** proposed | accepted | superseded by NNNN
 - **Date:** YYYY-MM-DD
-- **Decided by:** PM (product) / build (technical)
+- **Decided by:** owner / build (a ruling taken during `/build`)
 
 ## Context
 What problem or constraint forced a decision. Facts, not opinions.
